@@ -1,4 +1,4 @@
-Praise-or-Honor
+Suicide Mission
 ===============
 
 Artemis script for BayCon 2014
