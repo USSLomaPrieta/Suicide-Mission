@@ -4,25 +4,63 @@
   <!-- ******************************************************************************************** -->
   <!-- all the things that exist at the start of the mission -->
 <mission_data version="1.7" background_id_arme="6352da0a-8563-4c51-8d42-007f3631a489">
+
   <start name_arme="Start">
     <create type="player" x="50000" y="0" z="50000" name="Artemis" />
-    <set_difficulty_level value="5" />
+    
     <set_skybox_index index="9" />
     <big_message title="Praise or Honor" subtitle1="presented by the USS Loma Prieta" subtitle2="BayCon 2014" />
-    <set_timer name="start_mission_timer_1" seconds="10" />
-    <set_variable name="chapter_1" value="1" />
+    
+    <!--  Establishes location and type of enemies, the Artemis, and starbase. Sets mission to begin after 30 sec  -->
+    
     <create type="station" x="32298.0" y="0.0" z="92042.0" angle="0" name="Station Honor" />
-    <create type="neutral" x="44809.0" y="0.0" z="25914.0" angle="231" name="USS Kobayashi" />
+    <create type="neutral" x="44809.0" y="0.0" z="25914.0" angle="231" name="SS Murphy's Law" />
     <create type="player" x="49915.0" y="0.0" z="48978.0" angle="0" name="USS Artemis" />
-    <create type="enemy" x="52695.0" y="0.0" z="26085.0" angle="94.1" name="IAC Gorn" fleetnumber="-1" />
-    <create type="enemy" x="52099.0" y="0.0" z="18425.0" angle="133.7" name="IAC Breen" fleetnumber="-1" />
-    <create type="enemy" x="38852.0" y="0.0" z="18936.0" angle="210.2" name="IAC Tholian" fleetnumber="-1" />
-    <create type="enemy" x="39788.0" y="0.0" z="29659.0" angle="306" name="IAC Romulan" fleetnumber="-1" />
-    <create type="enemy" x="50086.0" y="0.0" z="32212.0" angle="42.9" name="IAC Gem Hadar" fleetnumber="-1" />
-    <create type="neutral" x="17320.0" y="0.0" z="3191.0" angle="215.5" name="USN Curly" />
-    <create type="neutral" x="93660.0" y="0.0" z="4297.0" angle="174.3" name="USN Larry" />
-    <create type="enemy" x="45830.0" y="0.0" z="87021.0" angle="126.5" name="RWA Gnat 1" fleetnumber="-1" />
-    <create type="enemy" x="33149.0" y="0.0" z="82340.0" angle="167.3" name="RWA Gnat 2" fleetnumber="-1" />
-    <create type="enemy" x="24383.0" y="0.0" z="86765.0" angle="219" name="RWA Gnat 3" fleetnumber="-1" />
+    <create type="enemy" raceKeys="Torgoth enemy" hullKeys="Battleship medium" x="52695.0" y="0.0" z="26085.0" angle="94.1" name="Dominion" fleetnumber="1" />
+    <create type="enemy" raceKeys="Torgoth enemy" hullKeys="Battleship medium" x="52099.0" y="0.0" z="18425.0" angle="133.7" name="Overloard" fleetnumber="1" />
+    <create type="enemy" raceKeys="Torgoth enemy" hullKeys="Battleship medium" x="38852.0" y="0.0" z="18936.0" angle="210.2" name="Relentless" fleetnumber="1" />
+    <create type="enemy" raceKeys="Torgoth enemy" hullKeys="Battleship medium" x="39788.0" y="0.0" z="29659.0" angle="306" name="Calamity" fleetnumber="1" />
+    <create type="enemy" raceKeys="Torgoth enemy" hullKeys="Battleship medium" x="50086.0" y="0.0" z="32212.0" angle="42.9" name="Devastator" fleetnumber="1" />
+    <create type="neutral" x="17320.0" y="0.0" z="3191.0" angle="215.5" name="TSN Manticore" />
+    <create type="neutral" x="93660.0" y="0.0" z="4297.0" angle="174.3" name="TSN Gryphon" />
+    <create type="enemy" raceKeys="Arvonian enemy" hullKeys="Fighter fighter" x="45830.0" y="0.0" z="87021.0" angle="126.5" name="Chimera One" fleetnumber="2" />
+    <create type="enemy" raceKeys="Arvonian enemy" hullKeys="Fighter fighter" x="33149.0" y="0.0" z="82340.0" angle="167.3" name="Chimera Two" fleetnumber="2" />
+    <create type="enemy" raceKeys="Arvonian enemy" hullKeys="Fighter fighter" x="24383.0" y="0.0" z="86765.0" angle="219" name="Chimera Three" fleetnumber="2" />
+    
+    <!--  setting up starting variables for events  -->
+    
+    <set_timer name="start_mission_timer_1" seconds="30" />
+    <set_variable name="chapter_1" value="1" />
+    <set_difficulty_level value="5" />
+    <set_variable name="MLcommA" value="0" />
+    <set_variable name="MLcommB" value="0" />
+    
+    
+    <set_variable name="ADMcommA" value="0" />
+    <set_variable name="ADMcommB" value="0" />
+    
   </start>
+  
+  <!-- SS Murphy's Law distress call 1 -->
+  
+  <event id_arme="f9b83aae-a588-48a4-a0ae-1b19ec0df33d">
+    <if_variable name="MLcommA" comparator="EQUALS" value="0" />
+    <if_timer_finished name="start_mission_timer_1" />
+    <big_message title="DISTRESS CALL DETECTED" subtitle1="" subtitle2="" />
+    <incoming_comms_text from="SS Murphy's Law">Mayday! Mayday! This is the SS Murphy's Law -- we are be&$#%& attacked by^%$$ Y%J^&&*** and we have sustained K&%$^ casualties...life support fai(*^%$...is anybody there? </incoming_comms_text>
+    <set_variable name="MLcommA" value="1" />
+    <set_timer name="ML1" seconds="20" />
+  </event>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 </mission_data>
