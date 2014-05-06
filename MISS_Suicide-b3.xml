@@ -1,7 +1,7 @@
 <!-- mission_data is the big wrapper for all the parts of a mission -->
 <!--  Suicide Mission scripted for BayCon 2014 event  -->
 <!--  Mission Script by Tom Hesser - mobilemactech@gmail.com -->
-<!--  Beta 2 -->
+<!--  Beta 3 -->
 <!-- ******************************************************************************************** -->
 <!-- all the things that exist at the start of the mission -->
 <mission_data version="1.7" background_id_arme="">
@@ -14,39 +14,30 @@
     <create type="station" x="31703.0" y="0.0" z="89404.0" angle="0" name="Station Honor" />
     	<set_object_property name="Station Honor" property="shieldState" value="2000"/>
     <create type="neutral" x="48757.0" y="0.0" z="52248.0" angle="231" name="SS Murphys Law" raceKeys="TSN friendly" hullKeys="Cargo" />
-        <set_object_property name="SS Murphys Law" property="systemDamageImpulse" value="1"/>
-        <set_object_property name="SS Murphys Law" property="systemDamageWarp" value="1"/>
     <create type="neutral" x="17320.0" y="0.0" z="3191.0" angle="215.5" name="TSN Manticore" raceKeys="TSN friendly" hullKeys="Destroyer medium" />
     <create type="neutral" x="93660.0" y="0.0" z="4297.0" angle="174.3" name="TSN Gryphon" raceKeys="TSN friendly" hullKeys="Escort small" />
-    <create type="enemy" x="49320.0" y="0.0" z="42680.0" angle="174.3" name="Dominion" raceKeys="Torgoth enemy" hullKeys="Battleship medium" fleetnumber="1" />
-    <create type="enemy" x="56047.0" y="0.0" z="44759.0" angle="133.7" name="Overlord" raceKeys="Torgoth enemy" hullKeys="Battleship medium" fleetnumber="1" />
-    <create type="enemy" x="44298.0" y="0.0" z="44127.0" angle="210.2" name="Relentless" raceKeys="Torgoth enemy" hullKeys="Battleship medium" fleetnumber="1" />
-    <create type="enemy" x="46596.0" y="0.0" z="42510.0" angle="184.2" name="Calamity" raceKeys="Torgoth enemy" hullKeys="Battleship medium" fleetnumber="1" />
-    <create type="enemy" x="52809.0" y="0.0" z="42595.0" angle="165.2" name="Devastator" raceKeys="Torgoth enemy" hullKeys="Battleship medium" fleetnumber="1" />
+    <create type="enemy" x="49320.0" y="0.0" z="48680.0" angle="174.3" name="Dominion" raceKeys="Kralien enemy" hullKeys="Battleship medium" fleetnumber="1" />
+    <create type="enemy" x="56047.0" y="0.0" z="50759.0" angle="133.7" name="Overlord" raceKeys="Kralien enemy" hullKeys="Battleship medium" fleetnumber="1" />
+    <create type="enemy" x="44298.0" y="0.0" z="50127.0" angle="210.2" name="Relentless" raceKeys="Kralien enemy" hullKeys="Battleship medium" fleetnumber="1" />
+    <create type="enemy" x="46596.0" y="0.0" z="48510.0" angle="184.2" name="Calamity" raceKeys="Kralien enemy" hullKeys="Battleship medium" fleetnumber="1" />
+    <create type="enemy" x="52809.0" y="0.0" z="48595.0" angle="165.2" name="Devastator" raceKeys="Kralien enemy" hullKeys="Battleship medium" fleetnumber="1" />
     <create type="enemy" x="39362.0" y="0.0" z="96978.0" angle="40.3" name="Chimera One" raceKeys="Arvonian enemy" hullKeys="Fighter fighter" fleetnumber="2" />
+    <add_ai name ="Chimera One" type ="CHASE_STATION" value1="8000" value2="1000" />
     <create type="enemy" x="30426.0" y="0.0" z="97659.0" angle="344.5" name="Chimera Two" raceKeys="Arvonian enemy" hullKeys="Fighter fighter" fleetnumber="2" />
+    <add_ai name ="Chimera Two" type ="CHASE_STATION" value1="8000" value2="1000" />
     <create type="enemy" x="22596.0" y="0.0" z="97914.0" angle="305.7" name="Chimera Three" raceKeys="Arvonian enemy" hullKeys="Fighter fighter" fleetnumber="2" />
+    <add_ai name ="Chimera Three" type ="CHASE_STATION" value1="8000" value2="1000" />
 
     <!-- Neutrals are set to follow orders to give COMMS something to do -->
     <add_ai type="FOLLOW_COMMS_ORDERS" name="TSN Manticore" />
     <add_ai type="FOLLOW_COMMS_ORDERS" name="TSN Gryphon" />
     <!-- Enemies set to head for the Murphys Law and Station Honor-->
-    <clear_ai name="Dominion" />
-    <add_ai type="TARGET_THROTTLE" targetName="SS Murphys Law" value1="1" name="Dominion" />
-    <clear_ai name="Overlord" />
-    <add_ai type="TARGET_THROTTLE" targetName="SS Murphys Law" value1="1" name="Overlord" />
-    <clear_ai name="Relentless" />
-    <add_ai type="TARGET_THROTTLE" targetName="SS Murphys Law" value1="1" name="Relentless" />
-    <clear_ai name="Calamity" />
-    <add_ai type="TARGET_THROTTLE" targetName="SS Murphys Law" value1="1" name="Calamity" />
-    <clear_ai name="Devastator" />
-    <add_ai type="TARGET_THROTTLE" targetName="SS Murphys Law" value1="1" name="Devastator" />
-    <clear_ai name="Chimera One" />
-    <add_ai type="TARGET_THROTTLE" targetName="Station Honor" value1="1" name="Chimera One" />
-    <clear_ai name="Chimera Two" />
-    <add_ai type="TARGET_THROTTLE" targetName="Station Honor" value1="1" name="Chimera Two" />
-    <clear_ai name="Chimera Three" />
-    <add_ai type="TARGET_THROTTLE" targetName="Station Honor" value1="1" name="Chimera Three" />
+
+    
+    
+    
+    
+    
     <!--  setting up starting variables for events  -->
     <set_timer name="start_mission_timer_1" seconds="30" />
     <set_variable name="chapter_1" value="1" />
@@ -74,6 +65,8 @@
   <event name_arme="Ship Distress 1" id_arme="729e2dbe-45f8-49a3-a4c9-abe5fd376efc">
     <if_variable name="MLcommA" comparator="EQUALS" value="0" />
     <if_timer_finished name="start_mission_timer_1" />
+    <set_object_property name="SS Murphys Law" property="systemDamageImpulse" value="1"/>
+    <set_object_property name="SS Murphys Law" property="systemDamageWarp" value="1"/>
     <big_message title="DISTRESS CALL DETECTED" subtitle1="" subtitle2="" />
     <incoming_comms_text from="SS Murphys Law">Mayday! Mayday! This is the SS Murphys Law -- we are be.....attacked by...........eed immediate assis.........ease respond!</incoming_comms_text>
     <set_variable name="MLcommA" value="1" />
@@ -84,34 +77,21 @@
     <if_variable name="MLcommA" comparator="EQUALS" value="1" />
     <if_variable name="ADMcommA" comparator="EQUALS" value="0" />
     <if_timer_finished name="ML1" />
+    <set_object_property name="SS Murphys Law" property="systemDamageImpulse" value="1"/>
+    <set_object_property name="SS Murphys Law" property="systemDamageWarp" value="1"/>
     <big_message title="INCOMING COMMAND MESSAGE - PRIORITY ONE" subtitle1="-MILITARY SIGNATURE CONFIRMED-" subtitle2="Admiral Linda Darkhart" />
     <incoming_comms_text from="Admiral Darkhart">Imperative! Imperative! This is Admiral Darkhart calling the SS Artemis. Respond immediately!</incoming_comms_text>
     <set_variable name="ADMcommA" value="1" />
     <set_timer name="ADM1" seconds="20" />
   </event>
-  <event name_arme="Enemies Attack" id_arme="bc86fee6-e7a0-4c0b-89c6-fe6acb53fe57">
-    <clear_ai name="Dominion" />
-    <add_ai name ="Dominion" type ="CHASE_NEUTRAL" value1="10000" value2="5000" />
-    <clear_ai name="Overlord" />
-    <add_ai name ="Overlord" type ="CHASE_NEUTRAL" value1="10000" value2="5000" />
-    <clear_ai name="Relentless" />
-    <add_ai name ="Relentless" type ="CHASE_NEUTRAL" value1="10000" value2="5000" />
-    <clear_ai name="Calamity" />
-    <add_ai name ="Calamity" type ="CHASE_NEUTRAL" value1="10000" value2="5000" />
-    <clear_ai name="Devastator" />
-    <add_ai name ="Devastator" type ="CHASE_NEUTRAL" value1="10000" value2="5000" />
-    <clear_ai name="Chimera One" />
-    <add_ai name ="Chimera One" type ="CHASE_STATION" value1="5000" value2="1000" />
-    <clear_ai name="Chimera Two" />
-    <add_ai name ="Chimera Two" type ="CHASE_STATION" value1="5000" value2="1000" />
-    <clear_ai name="Chimera Three" />
-    <add_ai name ="Chimera Three" type ="CHASE_STATION" value1="5000" value2="1000" />
-  </event>
+
   <!-- SS Murphys Law distress call 2-->
   <event name_arme="Ship Distress 2" id_arme="b1ac36a0-fc07-409d-9689-74587d7177d6">
     <if_variable name="ADMcommA" comparator="EQUALS" value="1" />
     <if_variable name="MLcommB" comparator="EQUALS" value="0" />
     <if_timer_finished name="ADM1" />
+    <set_object_property name="SS Murphys Law" property="systemDamageImpulse" value="1"/>
+    <set_object_property name="SS Murphys Law" property="systemDamageWarp" value="1"/>
     <incoming_comms_text from="SS Murphys Law">Repeat...Mayday.....ship is under attack.....ave no weapons....are helpless...</incoming_comms_text>
     <set_variable name="MLcommB" value="1" />
     <set_timer name="ML2" seconds="40" />
@@ -123,6 +103,8 @@
     <if_object_property name="Station Honor" property="shieldState" comparator="less" value="40"/>
     <set_object_property name="Station Honor" property="shieldState" value="400"/>
     <if_timer_finished name="ML2" />
+    <set_object_property name="SS Murphys Law" property="systemDamageImpulse" value="1"/>
+    <set_object_property name="SS Murphys Law" property="systemDamageWarp" value="1"/>
     <incoming_comms_text from="Admiral Darkhart">SS Artemis, you are hereby ordered to Sector xxx to defend Starbase Honor! We are under attack by hostile forces and the lives of several high ranking officers and diplomats are in dire jeopardy!</incoming_comms_text>
     <set_variable name="ADMcommB" value="1" />
     <set_timer name="ADM2" seconds="20" />
