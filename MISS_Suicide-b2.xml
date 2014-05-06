@@ -1,6 +1,7 @@
 <!-- mission_data is the big wrapper for all the parts of a mission -->
 <!--  Suicide Mission scripted for BayCon 2014 event  -->
 <!--  Mission Script by Tom Hesser - mobilemactech@gmail.com -->
+<!--  Beta 2 -->
 <!-- ******************************************************************************************** -->
 <!-- all the things that exist at the start of the mission -->
 <mission_data version="1.7" background_id_arme="">
@@ -12,8 +13,9 @@
     <!--  Establishes location and type of enemies, neutrals, the Artemis, and starbase. Sets mission to begin after 30 sec  -->
     <create type="station" x="31703.0" y="0.0" z="89404.0" angle="0" name="Station Honor" />
     	<set_object_property name="Station Honor" property="shieldState" value="2000"/>
-    <create type="neutral" x="48757.0" y="0.0" z="52248.0" angle="231" name="SS Murphy's Law" raceKeys="TSN friendly" hullKeys="Cargo" />
-        <set_object_property name="SS Murphy's Law" property="topSpeed" value="0"/>
+    <create type="neutral" x="48757.0" y="0.0" z="52248.0" angle="231" name="SS Murphys Law" raceKeys="TSN friendly" hullKeys="Cargo" />
+        <set_object_property name="SS Murphys Law" property="systemDamageImpulse" value="1"/>
+        <set_object_property name="SS Murphys Law" property="systemDamageWarp" value="1"/>
     <create type="neutral" x="17320.0" y="0.0" z="3191.0" angle="215.5" name="TSN Manticore" raceKeys="TSN friendly" hullKeys="Destroyer medium" />
     <create type="neutral" x="93660.0" y="0.0" z="4297.0" angle="174.3" name="TSN Gryphon" raceKeys="TSN friendly" hullKeys="Escort small" />
     <create type="enemy" x="49320.0" y="0.0" z="42680.0" angle="174.3" name="Dominion" raceKeys="Torgoth enemy" hullKeys="Battleship medium" fleetnumber="1" />
@@ -28,14 +30,22 @@
     <!-- Neutrals are set to follow orders to give COMMS something to do -->
     <add_ai type="FOLLOW_COMMS_ORDERS" name="TSN Manticore" />
     <add_ai type="FOLLOW_COMMS_ORDERS" name="TSN Gryphon" />
-    <!-- Enemies set to head for the Murphy's Law and Station Honor-->
-    <add_ai type="TARGET_THROTTLE" targetName="SS Murphy's Law" value1="1" name="Dominion" />
-    <add_ai type="TARGET_THROTTLE" targetName="SS Murphy's Law" value1="1" name="Overlord" />
-    <add_ai type="TARGET_THROTTLE" targetName="SS Murphy's Law" value1="1" name="Relentless" />
-    <add_ai type="TARGET_THROTTLE" targetName="SS Murphy's Law" value1="1" name="Calamity" />
-    <add_ai type="TARGET_THROTTLE" targetName="SS Murphy's Law" value1="1" name="Devastator" />
+    <!-- Enemies set to head for the Murphys Law and Station Honor-->
+    <clear_ai name="Dominion" />
+    <add_ai type="TARGET_THROTTLE" targetName="SS Murphys Law" value1="1" name="Dominion" />
+    <clear_ai name="Overlord" />
+    <add_ai type="TARGET_THROTTLE" targetName="SS Murphys Law" value1="1" name="Overlord" />
+    <clear_ai name="Relentless" />
+    <add_ai type="TARGET_THROTTLE" targetName="SS Murphys Law" value1="1" name="Relentless" />
+    <clear_ai name="Calamity" />
+    <add_ai type="TARGET_THROTTLE" targetName="SS Murphys Law" value1="1" name="Calamity" />
+    <clear_ai name="Devastator" />
+    <add_ai type="TARGET_THROTTLE" targetName="SS Murphys Law" value1="1" name="Devastator" />
+    <clear_ai name="Chimera One" />
     <add_ai type="TARGET_THROTTLE" targetName="Station Honor" value1="1" name="Chimera One" />
+    <clear_ai name="Chimera Two" />
     <add_ai type="TARGET_THROTTLE" targetName="Station Honor" value1="1" name="Chimera Two" />
+    <clear_ai name="Chimera Three" />
     <add_ai type="TARGET_THROTTLE" targetName="Station Honor" value1="1" name="Chimera Three" />
     <!--  setting up starting variables for events  -->
     <set_timer name="start_mission_timer_1" seconds="30" />
@@ -60,12 +70,12 @@
     <set_variable name="REScommB" value="0" />
   </start>
   <!-- Let the battles begin! -->
-  <!-- SS Murphy's Law distress call 1 -->
+  <!-- SS Murphys Law distress call 1 -->
   <event name_arme="Ship Distress 1" id_arme="729e2dbe-45f8-49a3-a4c9-abe5fd376efc">
     <if_variable name="MLcommA" comparator="EQUALS" value="0" />
     <if_timer_finished name="start_mission_timer_1" />
     <big_message title="DISTRESS CALL DETECTED" subtitle1="" subtitle2="" />
-    <incoming_comms_text from="SS Murphy's Law">Mayday! Mayday! This is the SS Murphy's Law -- we are be.....attacked by...........eed immediate assis.........ease respond!</incoming_comms_text>
+    <incoming_comms_text from="SS Murphys Law">Mayday! Mayday! This is the SS Murphys Law -- we are be.....attacked by...........eed immediate assis.........ease respond!</incoming_comms_text>
     <set_variable name="MLcommA" value="1" />
     <set_timer name="ML1" seconds="20" />
   </event>
@@ -97,12 +107,12 @@
     <clear_ai name="Chimera Three" />
     <add_ai name ="Chimera Three" type ="CHASE_STATION" value1="5000" value2="1000" />
   </event>
-  <!-- SS Murphy's Law distress call 2-->
+  <!-- SS Murphys Law distress call 2-->
   <event name_arme="Ship Distress 2" id_arme="b1ac36a0-fc07-409d-9689-74587d7177d6">
     <if_variable name="ADMcommA" comparator="EQUALS" value="1" />
     <if_variable name="MLcommB" comparator="EQUALS" value="0" />
     <if_timer_finished name="ADM1" />
-    <incoming_comms_text from="SS Murphy's Law">Repeat...Mayday.....ship is under attack.....ave no weapons....are helpless...</incoming_comms_text>
+    <incoming_comms_text from="SS Murphys Law">Repeat...Mayday.....ship is under attack.....ave no weapons....are helpless...</incoming_comms_text>
     <set_variable name="MLcommB" value="1" />
     <set_timer name="ML2" seconds="40" />
   </event>
@@ -117,13 +127,13 @@
     <set_variable name="ADMcommB" value="1" />
     <set_timer name="ADM2" seconds="20" />
   </event>
-  <!-- Murphy's Law takes damage -->
+  <!-- Murphys Law takes damage -->
   <event name_arme="Ship Damage" id_arme="e7fd92b8-8b94-4f04-b25f-ea66adc8fe64">
     <if_variable name="MLdamage" comparator="EQUALS" value="0" />
     <if_variable name="MLcommC" comparator="EQUALS" value="0" />
     <if_variable name="ADMcommB" comparator="EQUALS" value="1" />
-    <if_object_property property="shieldStateFront" name="SS Murphy's Law" comparator="LESS" value="29" />
-    <incoming_comms_text from="SS Murphy's Law">....have sustained heav....dam.....casualties....ife support is fai.....is anybody there?</incoming_comms_text>
+    <if_object_property property="shieldStateFront" name="SS Murphys Law" comparator="LESS" value="29" />
+    <incoming_comms_text from="SS Murphys Law">....have sustained heav....dam.....casualties....ife support is fai.....is anybody there?</incoming_comms_text>
     <set_variable name="MLcommC" value="1" />
     <set_variable name="MLdamage" value="1" />
   </event>
@@ -146,7 +156,7 @@
   <event name_arme="Saving Ship" id_arme="2f870541-0fa6-444a-ac57-d7ab375c653e">
     <if_variable name="MLsave" comparator="EQUALS" value="0" />
     <if_variable name="ADMcommC" comparator="EQUALS" value="1" />
-    <if_distance name1="Artemis" name2="SS Murphy's Law" comparator="LESS" value="5000" />
+    <if_distance name1="Artemis" name2="SS Murphys Law" comparator="LESS" value="5000" />
     <incoming_comms_text from="Admiral Darkhart">Admiral to the XO of the Artemis, relieve the Captain of his duties and have him sent to the brig!! I am now ordering YOU to turn that ship around and proceed at top speed to Station Honor immediately!</incoming_comms_text>
     <set_variable name="MLsave" value="1" />
     <set_variable name="ADMcommD" value="1" />
@@ -154,8 +164,8 @@
   <event name_arme="Saving Ship 2" id_arme="e4a3abc4-6902-45db-b84e-290d610b463f">
     <if_variable name="MLcommD" comparator="EQUALS" value="0" />
     <if_variable name="MLsave" comparator="EQUALS" value="1" />
-    <if_distance name1="Artemis" name2="SS Murphy's Law" comparator="LESS" value="4000" />
-    <incoming_comms_text from="SS Murphy's Law">Oh THANK YOU Artemis for coming to our rescue, but systems are failing and shields are almost gone.</incoming_comms_text>
+    <if_distance name1="Artemis" name2="SS Murphys Law" comparator="LESS" value="4000" />
+    <incoming_comms_text from="SS Murphys Law">Oh THANK YOU Artemis for coming to our rescue, but systems are failing and shields are almost gone.</incoming_comms_text>
     <set_variable name="MLcommD" value="1" />
     <set_variable name="MLengage" value="1" />
   </event>
@@ -232,7 +242,7 @@
   </event>
   
 <!--  <event>
-	<if_not_exists name="SS Murphy's Law"/>
+	<if_not_exists name="SS Murphys Law"/>
 	<if_variable name="terminate" comparator="!=" value="1"/>
 	<big_message title="DEFEAT!" subtitle1="Hamak Base was destroyed and the" subtitle2="Torgoths conquered the sector."/>
 	<set_timer name="endint_timer" seconds="10"/>
