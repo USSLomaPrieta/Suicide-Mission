@@ -64,8 +64,7 @@
   <event name="Ship Distress 1">
     <if_variable name="MLcommA" comparator="EQUALS" value="0" />
     <if_timer_finished name="start_mission_timer_1" />
-    <set_object_property name="SS Murphys Law" property="systemDamageImpulse" value="1"/>
-    <set_object_property name="SS Murphys Law" property="systemDamageWarp" value="1"/>
+
     <big_message title="DISTRESS CALL DETECTED" subtitle1="" subtitle2="" />
     <incoming_comms_text from="SS Murphys Law">Mayday! Mayday! This is the SS Murphys Law -- we are be.....attacked by...........eed immediate assis.........ease respond!</incoming_comms_text>
     <set_variable name="MLcommA" value="1" />
@@ -77,8 +76,7 @@
     <if_variable name="MLcommA" comparator="EQUALS" value="1" />
     <if_variable name="ADMcommA" comparator="EQUALS" value="0" />
     <if_timer_finished name="ML1" />
-    <set_object_property name="SS Murphys Law" property="systemDamageImpulse" value="1"/>
-    <set_object_property name="SS Murphys Law" property="systemDamageWarp" value="1"/>
+
     <big_message title="INCOMING COMMAND MESSAGE - PRIORITY ONE" subtitle1="-MILITARY SIGNATURE CONFIRMED-" subtitle2="Admiral Linda Darkhart" />
     <incoming_comms_text from="Admiral Darkhart">Imperative! Imperative! This is Admiral Darkhart calling the SS Artemis. Respond immediately!</incoming_comms_text>
     <set_variable name="ADMcommA" value="1" />
@@ -90,8 +88,8 @@
     <if_variable name="ADMcommA" comparator="EQUALS" value="1" />
     <if_variable name="MLcommB" comparator="EQUALS" value="0" />
     <if_timer_finished name="ADM1" />
-    <set_object_property name="SS Murphys Law" property="systemDamageImpulse" value="1"/>
-    <set_object_property name="SS Murphys Law" property="systemDamageWarp" value="1"/>
+    <set_object_property name="SS Murphys Law" property="scriptThrottle" value="0.0"/>
+
     <incoming_comms_text from="SS Murphys Law">Repeat...Mayday.....ship is under attack.....ave no weapons....are helpless...</incoming_comms_text>
     <set_variable name="MLcommB" value="1" />
     <set_timer name="ML2" seconds="40" />
@@ -106,8 +104,7 @@
     <set_object_property name="Station Honor" property="shieldState" value="400"/> -->
     
     <if_timer_finished name="ML2" />
-    <set_object_property name="SS Murphys Law" property="systemDamageImpulse" value="1"/>
-    <set_object_property name="SS Murphys Law" property="systemDamageWarp" value="1"/>
+
     <incoming_comms_text from="Admiral Darkhart">SS Artemis, you are hereby ordered to Sector E4 to defend Starbase Honor! We are under attack by hostile forces and the lives of several high ranking officers and diplomats are in dire jeopardy!</incoming_comms_text>
     <set_variable name="ADMcommB" value="1" />
     <set_timer name="ADM2" seconds="20" />
