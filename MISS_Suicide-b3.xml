@@ -61,12 +61,15 @@
   </start>
   <!-- Let the battles begin! -->
   <!-- SS Murphys Law distress call 1 -->
+  
   <event name="Ship Distress 1">
     <if_variable name="MLcommA" comparator="EQUALS" value="0" />
     <if_timer_finished name="start_mission_timer_1" />
 
     <big_message title="DISTRESS CALL DETECTED" subtitle1="" subtitle2="" />
     <incoming_comms_text from="SS Murphys Law">Mayday! Mayday! This is the SS Murphys Law -- we are be.....attacked by...........eed immediate assis.........ease respond!</incoming_comms_text>
+    <set_object_property name="SS Murphys Law" property="systemDamageImpulse" value="1"/>
+    <set_object_property name="SS Murphys Law" property="systemDamageWarp" value="1"/>
     <set_variable name="MLcommA" value="1" />
     <set_timer name="ML1" seconds="20" />
   </event>
@@ -88,7 +91,8 @@
     <if_variable name="ADMcommA" comparator="EQUALS" value="1" />
     <if_variable name="MLcommB" comparator="EQUALS" value="0" />
     <if_timer_finished name="ADM1" />
-    <set_object_property name="SS Murphys Law" property="scriptThrottle" value="0.0"/>
+    <set_object_property name="SS Murphys Law" property="systemDamageImpulse" value="1"/>
+    <set_object_property name="SS Murphys Law" property="systemDamageWarp" value="1"/>
 
     <incoming_comms_text from="SS Murphys Law">Repeat...Mayday.....ship is under attack.....ave no weapons....are helpless...</incoming_comms_text>
     <set_variable name="MLcommB" value="1" />
@@ -98,10 +102,9 @@
   <!-- Starbase Honor distress call 2 -->
   <event name="Base Distress 2">
     <if_variable name="MLcommB" comparator="EQUALS" value="1" />
-    <if_variable name="ADMcommB" comparator="EQUALS" value="0" />
-  <!--  
+    <if_variable name="ADMcommB" comparator="EQUALS" value="0" />  
     <if_object_property name="Station Honor" property="shieldState" comparator="less" value="100"/>
-    <set_object_property name="Station Honor" property="shieldState" value="400"/> -->
+    <set_object_property name="Station Honor" property="shieldState" value="400"/>
     
     <if_timer_finished name="ML2" />
 
@@ -115,7 +118,9 @@
     <if_variable name="MLdamage" comparator="EQUALS" value="0" />
     <if_variable name="MLcommC" comparator="EQUALS" value="0" />
     <if_variable name="ADMcommB" comparator="EQUALS" value="1" />
-    <if_object_property property="shieldStateFront" name="SS Murphys Law" comparator="LESS" value="25" />
+    <set_object_property name="SS Murphys Law" property="systemDamageImpulse" value="1"/>
+    <set_object_property name="SS Murphys Law" property="systemDamageWarp" value="1"/>
+    <if_object_property property="shieldStateFront" name="SS Murphys Law" comparator="LESS_EQUAL" value="25" />
     <incoming_comms_text from="SS Murphys Law">....have sustained heav....dam.....casualties....ife support is fai.....is anybody there?</incoming_comms_text>
     <set_variable name="MLcommC" value="1" />
     <set_variable name="MLdamage" value="1" />
@@ -132,17 +137,21 @@
     <set_variable name="STdamage" value="1" />
   </event>
   
-  <!-- ??? 
+ 
   <event>
   	<if_object_property name="Station Honor" property="shieldState" comparator="less" value="100"/>
     <set_object_property name="Station Honor" property="shieldState" value="400"/>
-  </event> -->
+    <if_object_property name="SS Murphys Law" property="shieldState" comparator="less" value="10"/>
+    <set_object_property name="SS Murphys Law" property="shieldState" value="20"/>
+    <set_object_property name="SS Murphys Law" property="systemDamageImpulse" value="1"/>
+    <set_object_property name="SS Murphys Law" property="systemDamageWarp" value="1"/>
+  </event>
   
   <!-- You have chosen the honorable path -->
   <event name="Saving Ship">
     <if_variable name="MLsave" comparator="EQUALS" value="0" />
     <if_variable name="ADMcommC" comparator="EQUALS" value="1" />
-    <if_distance name1="Artemis" name2="SS Murphys Law" comparator="LESS" value="5000" />
+    <if_distance name1="Artemis" name2="SS Murphys Law" comparator="LESS_EQUAL" value="5000" />
     <incoming_comms_text from="Admiral Darkhart">Admiral to the XO of the Artemis, relieve the Captain of his duties and have him sent to the brig!! I am now ordering YOU to turn that ship around and proceed at top speed to Station Honor immediately!</incoming_comms_text>
     <set_variable name="MLsave" value="1" />
     <set_variable name="ADMcommD" value="1" />
@@ -176,7 +185,7 @@
   <event name="Saving Station">
     <if_variable name="STsave" comparator="EQUALS" value="0" />
     <if_variable name="ADMcommE" comparator="EQUALS" value="0" />
-    <if_distance name1="Artemis" name2="Station Honor" comparator="LESS" value="5000" />
+    <if_distance name1="Artemis" name2="Station Honor" comparator="LESS_EQUAL" value="5000" />
     <incoming_comms_text from="Admiral Darkhart">Captain, I knew you'd make the right decision. You had me worried for a minute. Now get over here and save this station!</incoming_comms_text>
     <set_variable name="STsave" value="1" />
     <set_variable name="ADMcommE" value="1" />
@@ -200,7 +209,7 @@
     <set_variable name="ADMcommF" value="1" />
   </event>
   
-  <!-- Winning and losing the mission -->
+  <!-- Winning and losing the mission
   <event>
   	<if_variable name="ADMcommF" comparator="EQUALS" value="1" />
   	<if_fleet_count fleetnumber="2" comparator="LESS_EQUAL" value="0"/>
@@ -227,13 +236,13 @@
 	<set_variable name="terminate" value="1"/>
   </event>
   
-<!--  <event>
+<event>
 	<if_not_exists name="SS Murphys Law"/>
 	<if_variable name="terminate" comparator="!=" value="1"/>
 	<big_message title="DEFEAT!" subtitle1="Hamak Base was destroyed and the" subtitle2="Torgoths conquered the sector."/>
 	<set_timer name="endint_timer" seconds="10"/>
 	<set_variable name="terminate" value="1"/>
-  </event> -->
+  </event>
   
   <event>
    <if_variable name="terminate" comparator="=" value="1"/>
@@ -241,7 +250,7 @@
    <if_timer_finished name="endint_timer"/>
    <set_variable name="gameOver" value="1"/>
  </event>
-
+-->
 
 
 
